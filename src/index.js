@@ -1,13 +1,14 @@
+// src/index.js
+
 import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
+import ReactDOM from 'react-dom';
+import Form from './components/Form'; // Import the Form component instead of App
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <Form /> {/* Render the Form component */}
   </React.StrictMode>
 );
 
