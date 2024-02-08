@@ -35,7 +35,7 @@ const Form = () => {
             firstName: validateName(formData.firstName),
             lastName: validateName(formData.lastName),
             email: validateEmail(formData.email),
-            dateOfBirth: validateAge(formData.dateOfBirth),
+            dateOfBirth: validateAge(new Date(formData.dateOfBirth)),
             postalCode: validatePostalCode(formData.postalCode),
         };
     };
@@ -83,7 +83,7 @@ const Form = () => {
                 firstName: '',
                 lastName: '',
                 email: '',
-                dateOfBirth: '',
+                dateOfBirth: Date,
                 city: '',
                 postalCode: '',
             });
