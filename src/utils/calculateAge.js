@@ -6,14 +6,14 @@
  */
 export function calculateAge(p) {
     if (!p) {
-        throw new Error("Missing param p")
+        throw new Error("Paramètre p manquant")
     }
 
     if (!(p instanceof Date)) {
-        throw new Error("The provided birth param must be a Date object");
+        throw new Error("Le paramètre de naissance fourni doit être un objet Date");
     }
     if (p > Date.now())
-        throw new Error("The provided birth date cannot be in the future");
+        throw new Error("La date de naissance indiquée ne peut pas être dans le future");
 
     const dateDiff = new Date(Date.now() - p);
     const age = Math.abs(dateDiff.getUTCFullYear() - 1970);

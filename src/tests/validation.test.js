@@ -70,6 +70,13 @@ describe('Tests for Validation Functions', () => {
       const result = validateAge('2010-01-01'); // Assuming birthdate is on January 1, 2010
       expect(result).toBe('Doit avoir 18 ans ou plus');
     });
+
+    it('validateAge should return error message for future date', () => {
+      const futureDate = new Date();
+      futureDate.setFullYear(futureDate.getFullYear() + 1);
+      const result = validateAge(futureDate);
+      expect(result).toBe("La date de naissance indiquée ne peut pas être dans le future");
+    });
   });
   describe("validatePostalCode tests", () => {
 

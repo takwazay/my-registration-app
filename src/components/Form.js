@@ -6,8 +6,6 @@ import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
-// Importez vos fonctions de validation ici
 import { validateName, validateEmail, validateAge, validatePostalCode } from '../utils/validation';
 
 const Form = () => {
@@ -44,21 +42,21 @@ const Form = () => {
         try {
             // Récupère les données actuelles dans le local storage (s'il y en a)
             const storedData = JSON.parse(localStorage.getItem('formData')) || [];
-    
+
             // Ajoute les nouvelles données au tableau existant
             storedData.push(formData);
-    
+
             // Sauvegarde le tableau mis à jour dans le local storage
             localStorage.setItem('formData', JSON.stringify(storedData));
-    
+
             // Affiche un message de succès si la sauvegarde est réussie
             console.log('Données sauvegardées avec succès dans le local storage:', storedData);
         } catch (error) {
             // En cas d'erreur, affiche un message d'erreur
-            console.error('Erreur lors de la sauvegarde dans le local storage:', error);
+            toast.error('Erreur lors de la sauvegarde des données dans le local storage:', error, { autoClose: 3000 });
         }
     };
-    
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -71,10 +69,10 @@ const Form = () => {
             // Affiche le toast d'erreur
             toast.error('Le formulaire contient des erreurs. Veuillez les corriger.', { autoClose: 3000 });
         } else {
-             // Sauvegarde dans le local storage
-        saveToLocalStorage();
+            // Sauvegarde dans le local storage
+            saveToLocalStorage();
 
-        
+
             // Affiche le toast de succès
             toast.success('Enregistrement réussi!', { autoClose: 3000 });
 
@@ -83,7 +81,7 @@ const Form = () => {
                 firstName: '',
                 lastName: '',
                 email: '',
-                dateOfBirth: Date,
+                dateOfBirth: '',
                 city: '',
                 postalCode: '',
             });
@@ -110,7 +108,7 @@ const Form = () => {
                 onSubmit={handleSubmit}
             >
                 <TextField
-                    label="Prénom"
+                    label="Prenom"
                     variant="outlined"
                     name="firstName"
                     value={formData.firstName}
