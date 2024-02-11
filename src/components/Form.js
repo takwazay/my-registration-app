@@ -1,3 +1,19 @@
+/**
+ * Formulaire de saisie des informations d'inscription.
+ * @module Form
+ * @requires React
+ * @requires useState
+ * @requires TextField
+ * @requires Button
+ * @requires Box
+ * @requires Paper
+ * @requires Typography
+ * @requires react-toastify
+ * @requires validateName
+ * @requires validateEmail
+ * @requires validateAge
+ * @requires validatePostalCode
+ */
 import React, { useState } from 'react';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
@@ -8,6 +24,10 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { validateName, validateEmail, validateAge, validatePostalCode } from '../utils/validation';
 
+/**
+ * Composant fonctionnel représentant le formulaire d'inscription.
+ * @returns {JSX.Element} Composant de formulaire d'inscription.
+ */
 const Form = () => {
     const [formData, setFormData] = useState({
         firstName: '',
@@ -26,9 +46,11 @@ const Form = () => {
         postalCode: '',
     });
 
-
+    /**
+    * Fonction de validation du formulaire.
+    * @returns {Object} Erreurs de validation du formulaire.
+    */
     const validateForm = () => {
-        // Fonction de validation globale
         return {
             firstName: validateName(formData.firstName),
             lastName: validateName(formData.lastName),
@@ -38,6 +60,10 @@ const Form = () => {
         };
     };
 
+    /**
+     * Fonction pour sauvegarder les données dans le local storage.
+     * @returns {void}
+     */
     const saveToLocalStorage = () => {
         try {
             // Récupère les données actuelles dans le local storage (s'il y en a)
@@ -58,6 +84,10 @@ const Form = () => {
     };
 
 
+    /**
+    * Fonction de soumission du formulaire.
+    * @param {Object} e - Événement de soumission du formulaire.
+    */
     const handleSubmit = (e) => {
         e.preventDefault();
 

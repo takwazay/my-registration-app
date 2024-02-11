@@ -1,8 +1,9 @@
 /**
- * Calculates the age in years of a person.
- * @param {object} p - An object representing a person with a birth Date parameter.
- * @returns {number} - The age in years of the person.
- * @throws {Error} - Throws an error for invalid arguments or dates.
+ * Calcule l'âge à partir d'une date de naissance fournie.
+ * @param {Date} p - La date de naissance.
+ * @throws {Error} Si le paramètre `p` est manquant ou n'est pas un objet Date.
+ * @throws {Error} Si la date de naissance indiquée est dans le futur.
+ * @returns {number} L'âge calculé à partir de la date de naissance fournie.
  */
 export function calculateAge(p) {
     if (!p) {

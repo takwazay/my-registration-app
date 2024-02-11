@@ -4,7 +4,7 @@ import { validateName, validateEmail, validateAge, validatePostalCode } from "..
 describe('Tests for Validation Functions', () => {
   describe("validateName tests", () => {
 
-    const mockValidNames = ['Takwa', 'Takwa Zay', 'TT'];
+    const mockValidNames = ['Takwa', 'Takwa Zay', 'TT', 'takwa-zayene'];
 
     mockValidNames.forEach((name) => {
       test(`validateName should return empty string for valid name "${name}"`, () => {
@@ -108,6 +108,5 @@ describe('Tests for Validation Functions', () => {
         expect(result).toBe('Le code postal doit être composé de cinq chiffres');
       });
     });
-
   });
 });
