@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/static/css/main.f029a054.css",
-    "main.js": "/static/js/main.980cb99f.js",
-    "static/js/592.c6cd40c0.chunk.js": "/static/js/592.c6cd40c0.chunk.js",
-    "index.html": "/index.html",
-    "main.f029a054.css.map": "/static/css/main.f029a054.css.map",
-    "main.980cb99f.js.map": "/static/js/main.980cb99f.js.map",
-    "592.c6cd40c0.chunk.js.map": "/static/js/592.c6cd40c0.chunk.js.map"
+    "main.css": "/my-registration-app/static/css/main.f029a054.css",
+    "main.js": "/my-registration-app/static/js/main.1f1a7512.js",
+    "static/js/592.c6cd40c0.chunk.js": "/my-registration-app/static/js/592.c6cd40c0.chunk.js",
+    "index.html": "/my-registration-app/index.html",
+    "main.f029a054.css.map": "/my-registration-app/static/css/main.f029a054.css.map",
+    "main.1f1a7512.js.map": "/my-registration-app/static/js/main.1f1a7512.js.map",
+    "592.c6cd40c0.chunk.js.map": "/my-registration-app/static/js/592.c6cd40c0.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.f029a054.css",
-    "static/js/main.980cb99f.js"
+    "static/js/main.1f1a7512.js"
   ]
 }
