@@ -63,4 +63,12 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2
+
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v4.0.1
+        env:
+         token: ${{ secrets.CODECOV_TOKEN }}
+         slug: takwazay/my-registration-app
+      
+  
  
