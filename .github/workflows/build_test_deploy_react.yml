@@ -31,6 +31,10 @@ jobs:
           npm ci
           npm run build --if-present
           npm test  
+      - name: Install JSDoc
+        run: npm install -g jsdoc
+      - name: Generate JSDoc
+        run: npm run jsdoc   
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v3
         env:
