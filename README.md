@@ -7,10 +7,8 @@ Before running the application, ensure you have Node.js and npm installed on you
 # How to Run
 Clone this repository to your local machine.
 Navigate to the project directory in your terminal.
-Run 
 ### `npm install` 
 to install the project dependencies.
-
 Run
 ### `npm run start` 
 to start the development server.
