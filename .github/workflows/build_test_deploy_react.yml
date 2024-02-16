@@ -48,6 +48,12 @@ jobs:
           # Upload entire repository
           path: build
           if-no-files-found: error
+      - name: Upload documentation as artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: documentation
+          path: docs
+          if-no-files-found: error
           
 # Deploy job
   deploy:
