@@ -26,15 +26,24 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
-      - name: Set Git Identity
-        run: |
-          git config --global user.email "zayenetakwa@gmail.com"
-          git config --global user.name "takwazay"
       - name: npm ci, build and test
         run: |
           npm ci
           npm run build --if-present
-          npm test  
+          npm test 
+          # we use either git tag and npm version or semver
+      - name: Update versionning
+        run: |
+          # Récupérer l'ID du workflow, le numéro d'exécution et le nombre de tentatives
+          git config --global user.email "zayenetakwa@gmail.com"
+          git config --global user.name "takwazay" 
+          npm i -g semver
+          npm version $(semver 0.1.1 -i prerelease --preid ${{github.run_id}}-${{github.run_number}}-${{github.run_attempt}})
+          npm version
+          echo $(semver 0.1.1 -i prerelease --preid ${{github.run_id}}-${{github.run_number}}-${{github.run_attempt}}) >> README.md
+          git status
+          git add .
+          git push -m "Generate new version ${{github.run_id}}-${{github.run_number}}-${{github.run_attempt}}
       - name: Install JSDoc
         run: npm install -g jsdoc
       - name: Generate JSDoc
@@ -52,26 +61,6 @@ jobs:
           # Upload entire repository
           path: build
           if-no-files-found: error
-      - name: Upload documentation as artifact
-        uses:  actions/upload-pages-artifact@v2
-        with:
-          name: documentation
-          path: public/docs
-          if-no-files-found: error
-      - name: Update build version
-        run: |
-          # Récupérer l'ID du workflow, le numéro d'exécution et le nombre de tentatives
-          run_id=${{ github.run_id }}
-          run_number=${{ github.run_number }}
-          run_attempt=${{ github.run_attempt }}
-      
-          # Construire la nouvelle version en fonction des informations extraites
-          new_version="0.${run_number}.${run_attempt}-build+${run_id}"
-      
-          # Ajouter le nouveau tag de version dans le dépôt Git
-          git tag $new_version
-          # Définir la nouvelle version dans le fichier package.json
-          npm version from-git --allow-same-version
 
 # Deploy job
   deploy:
@@ -95,6 +84,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2
-      - name : Deploy docs to GitHub Pages
-        uses: actions/download-artifact@v2
-
