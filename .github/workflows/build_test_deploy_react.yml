@@ -29,12 +29,29 @@ jobs:
       - name: npm ci, build and test
         run: |
           npm ci
+          npm install
+          npm test 
+          # we use either git tag and npm version or semver
+      - name: Set env
+        run: |
+          npm i -g semver
+          echo "GITHUB_VERSION_BUILD=$(echo $(semver 0.1.1 -i prerelease --preid ${{github.run_id}}-${{github.run_number}}-${{github.run_attempt}}))" >> $GITHUB_ENV
+      - name: Update versionning
+        run: |
+         git config --global user.email "zayenetakwa@gmail.com"
+         git config --global user.name "takwazay" 
+         npm version ${{env.GITHUB_VERSION_BUILD}}
+         echo ${{env.GITHUB_VERSION_BUILD}} >> README.md
+         git commit -a -m "new version ${{env.GITHUB_VERSION_BUILD}}"  
+      - name: Build and docs
+        run: |
+          npm run jsdoc
           npm run build --if-present
-          npm test  
-      - name: Install JSDoc
-        run: npm install -g jsdoc
-      - name: Generate JSDoc
-        run: npm run jsdoc   
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v3
         env:
@@ -48,13 +65,7 @@ jobs:
           # Upload entire repository
           path: build
           if-no-files-found: error
-      - name: Upload documentation as artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: documentation
-          path: public/docs
-          if-no-files-found: error
-          
+
 # Deploy job
   deploy:
     # Deploy to the github-pages environment
