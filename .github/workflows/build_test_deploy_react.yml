@@ -66,16 +66,13 @@ jobs:
           run_attempt=${{ github.run_attempt }}
       
           # Construire la nouvelle version en fonction des informations extraites
-          new_version="${run_id}.${run_number}.${run_attempt}"
-      
-          # Définir la nouvelle version dans le fichier package.json
-          npm version $new_version --no-git-tag-version
+          new_version="0.${run_number}.${run_attempt}-build+${run_id}"
       
           # Ajouter le nouveau tag de version dans le dépôt Git
           git tag $new_version
-          git push origin $new_version
+          # Définir la nouvelle version dans le fichier package.json
+          npm version from-git --allow-same-version
 
-          
 # Deploy job
   deploy:
     # Deploy to the github-pages environment
