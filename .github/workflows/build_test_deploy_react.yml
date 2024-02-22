@@ -26,6 +26,10 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
+      - name: Set Git Identity
+        run: |
+          git config --global user.email "zayenetakwa@gmail.com"
+          git config --global user.name "takwazay"
       - name: npm ci, build and test
         run: |
           npm ci
