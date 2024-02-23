@@ -37,3 +37,4 @@ Ejects from Create React App, allowing you to have full control over the configu
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+0.1.2-8019617560-32-1.0
