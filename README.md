@@ -40,3 +40,4 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 0.1.2-8019617560-32-1.0
 0.1.2-8019643161-33-1.0
 0.1.2-8204233525-34-1.0
+0.1.2-8204889848-35-1.0
