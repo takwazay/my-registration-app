@@ -29,7 +29,8 @@
     "eject": "react-scripts eject",
     "jsdoc": "jsdoc -R ./README.md -c ./jsdoc.config.json -r -d ./public/docs",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d build",
+    "cypress": "cypress open"
   },
   "eslintConfig": {
     "extends": [
@@ -51,8 +52,8 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "cypress": "^13.6.6",
     "gh-pages": "^6.1.1",
-    "react-test-renderer": "^18.2.0",
-    "cypress": "^13.6.6"
+    "react-test-renderer": "^18.2.0"
   }
 }
