@@ -4,6 +4,7 @@
 /node_modules
 /.pnp
 .pnp.js
+/server/__pycache__
 
 # testing
 /coverage
