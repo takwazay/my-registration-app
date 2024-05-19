@@ -1,61 +1,48 @@
-# Use root/example as user/password credentials
 version: '3.1'
 
-x-common-variables: &common-variables
-  REACT_APP_SERVER_PORT: 8000
-
 services:
-
   db:
-    image: mysql:latest
+    image: mysql:8.0.37
     command: --default-authentication-plugin=mysql_native_password
     restart: always
     environment:
-      - MYSQL_ROOT_PASSWORD
-    ports:
-      - 3307:3307
+      - MYSQL_ROOT_PASSWORD=root
     volumes:
-      - ./sqlfiles/:/docker-entrypoint-initdb.d/
-  adminer:
-    depends_on:
-      - db
-    image: adminer
-    restart: always
+      - ./sqlfiles:/docker-entrypoint-initdb.d/
     ports:
-      - 8080:8080
-  server:
-    image: nodejs
+      - 3306:3306
+
+  server-py:
+    image: server-py
+    restart: always
     volumes:
-      - ./server:/server
-      - /server/node_modules
-    build:
-      context: .
-      dockerfile: ./server/DockerfileNodejs
-    restart: always
+      - ./server-py:/server-py
+    build: 
+      context: ./server-py
+      dockerfile: Dockerfile
     ports:
-      - 8000:8000
+      - 8001:8001
     environment:
       - MYSQL_HOST=db
-      - MYSQL_DATABASE
-      - MYSQL_USER
-      - MYSQL_ROOT_PASSWORD
-      - PORT=8000
+      - MYSQL_DATABASE=myregistrationdb
+      - MYSQL_USER=root
+      - MYSQL_ROOT_PASSWORD=root
     depends_on:
       - db
-    command: node server.js
+    command: uvicorn main:app --proxy-headers --host 0.0.0.0 --port 8001
+
   react:
     image: react
-    build:
-      context: .
-      dockerfile: ./DockerfileReact
+    build: 
+      context: ./app
+      dockerfile: Dockerfile
     ports:
       - 3000:3000
     environment:
-      <<: *common-variables
+      - REACT_APP_SERVER_PORT=8001
     volumes:
-      - .:/app
+      - ./app:/app
       - /app/node_modules
-      - /app/server
     depends_on:
-      - server
+      - server-py
     command: npm start

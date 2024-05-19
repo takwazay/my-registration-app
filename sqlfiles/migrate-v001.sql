@@ -1,1 +1,1 @@
-CREATE DATABASE ynov_ci;
+CREATE DATABASE myregistrationdb;

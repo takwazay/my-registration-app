@@ -1,13 +1,11 @@
-USE ynov_ci;
-CREATE TABLE utilisateur
+USE myregistrationdb;
+CREATE TABLE users
 (
-    id INT PRIMARY KEY NOT NULL,
-    nom VARCHAR(100),
-    prenom VARCHAR(100),
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    firstName VARCHAR(100),
+    lastName VARCHAR(100),
     email VARCHAR(255),
-    date_naissance DATE,
-    pays VARCHAR(255),
-    ville VARCHAR(255),
-    code_postal VARCHAR(5),
-    nombre_achat INT
+    dateOfBirth DATE,
+    city VARCHAR(255),
+    postalCode VARCHAR(255)
 );

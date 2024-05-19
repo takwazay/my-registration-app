@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1711019107184" clover="3.2.0">
+  <project timestamp="1711019107184" name="All files">
+    <metrics statements="74" coveredstatements="59" conditionals="20" coveredconditionals="20" methods="22" coveredmethods="18" elements="116" coveredelements="97" complexity="0" loc="74" ncloc="74" packages="3" files="6" classes="6"/>
+    <package name="src">
+      <metrics statements="17" coveredstatements="8" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="1"/>
+      <file name="App.js" path="C:\Users\asus\OneDrive\Bureau\ynov-master2\deploiment\my-registration-app\src\App.js">
+        <metrics statements="9" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="0"/>
+        <line num="5" count="0" type="stmt"/>
+        <line num="7" count="0" type="stmt"/>
+        <line num="8" count="0" type="stmt"/>
+        <line num="9" count="0" type="stmt"/>
+        <line num="10" count="0" type="stmt"/>
+        <line num="11" count="0" type="stmt"/>
+        <line num="13" count="0" type="stmt"/>
+        <line num="17" count="0" type="stmt"/>
+        <line num="20" count="0" type="stmt"/>
+      </file>
+      <file name="api.js" path="C:\Users\asus\OneDrive\Bureau\ynov-master2\deploiment\my-registration-app\src\api.js">
+        <metrics statements="8" coveredstatements="8" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="5" count="2" type="stmt"/>
+        <line num="6" count="2" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="9" count="1" type="stmt"/>
+        <line num="10" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.components">
+      <metrics statements="29" coveredstatements="29" conditionals="4" coveredconditionals="4" methods="12" coveredmethods="12"/>
+      <file name="Form.js" path="C:\Users\asus\OneDrive\Bureau\ynov-master2\deploiment\my-registration-app\src\components\Form.js">
+        <metrics statements="29" coveredstatements="29" conditionals="4" coveredconditionals="4" methods="12" coveredmethods="12"/>
+        <line num="31" count="1" type="stmt"/>
+        <line num="32" count="32" type="stmt"/>
+        <line num="41" count="32" type="stmt"/>
+        <line num="53" count="32" type="stmt"/>
+        <line num="54" count="3" type="stmt"/>
+        <line num="67" count="32" type="stmt"/>
+        <line num="68" count="2" type="stmt"/>
+        <line num="70" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="73" count="2" type="stmt"/>
+        <line num="76" count="2" type="stmt"/>
+        <line num="79" count="1" type="stmt"/>
+        <line num="82" count="1" type="stmt"/>
+        <line num="91" count="32" type="stmt"/>
+        <line num="92" count="3" type="stmt"/>
+        <line num="94" count="3" type="stmt"/>
+        <line num="96" count="3" type="stmt"/>
+        <line num="98" count="11" type="cond" truecount="2" falsecount="0"/>
+        <line num="100" count="1" type="stmt"/>
+        <line num="103" count="2" type="stmt"/>
+        <line num="107" count="2" type="stmt"/>
+        <line num="110" count="2" type="stmt"/>
+        <line num="121" count="32" type="stmt"/>
+        <line num="145" count="4" type="stmt"/>
+        <line num="155" count="4" type="stmt"/>
+        <line num="165" count="4" type="stmt"/>
+        <line num="176" count="4" type="stmt"/>
+        <line num="189" count="4" type="stmt"/>
+        <line num="197" count="4" type="stmt"/>
+        <line num="207" count="97" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.utils">
+      <metrics statements="28" coveredstatements="22" conditionals="16" coveredconditionals="16" methods="6" coveredmethods="5"/>
+      <file name="calculateAge.js" path="C:\Users\asus\OneDrive\Bureau\ynov-master2\deploiment\my-registration-app\src\utils\calculateAge.js">
+        <metrics statements="9" coveredstatements="9" conditionals="6" coveredconditionals="6" methods="1" coveredmethods="1"/>
+        <line num="9" count="13" type="cond" truecount="2" falsecount="0"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="13" count="12" type="cond" truecount="2" falsecount="0"/>
+        <line num="14" count="2" type="stmt"/>
+        <line num="16" count="10" type="cond" truecount="2" falsecount="0"/>
+        <line num="17" count="2" type="stmt"/>
+        <line num="19" count="8" type="stmt"/>
+        <line num="20" count="8" type="stmt"/>
+        <line num="22" count="8" type="stmt"/>
+      </file>
+      <file name="user.js" path="C:\Users\asus\OneDrive\Bureau\ynov-master2\deploiment\my-registration-app\src\utils\user.js">
+        <metrics statements="6" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <line num="3" count="0" type="stmt"/>
+        <line num="4" count="0" type="stmt"/>
+        <line num="6" count="0" type="stmt"/>
+        <line num="7" count="0" type="stmt"/>
+        <line num="10" count="0" type="stmt"/>
+        <line num="11" count="0" type="stmt"/>
+      </file>
+      <file name="validation.js" path="C:\Users\asus\OneDrive\Bureau\ynov-master2\deploiment\my-registration-app\src\utils\validation.js">
+        <metrics statements="13" coveredstatements="13" conditionals="10" coveredconditionals="10" methods="4" coveredmethods="4"/>
+        <line num="19" count="2" type="stmt"/>
+        <line num="20" count="15" type="cond" truecount="4" falsecount="0"/>
+        <line num="39" count="2" type="stmt"/>
+        <line num="40" count="9" type="cond" truecount="2" falsecount="0"/>
+        <line num="60" count="2" type="stmt"/>
+        <line num="61" count="6" type="stmt"/>
+        <line num="62" count="6" type="stmt"/>
+        <line num="63" count="5" type="cond" truecount="2" falsecount="0"/>
+        <line num="64" count="3" type="stmt"/>
+        <line num="66" count="2" type="stmt"/>
+        <line num="69" count="1" type="stmt"/>
+        <line num="86" count="2" type="stmt"/>
+        <line num="87" count="10" type="cond" truecount="2" falsecount="0"/>
+      </file>
+    </package>
+  </project>
+</coverage>

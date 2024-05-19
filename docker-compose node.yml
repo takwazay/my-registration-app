@@ -1,0 +1,43 @@
+version: '3.1'
+
+services:
+  mongodb:
+    image: mongo
+    ports:
+      - 27017:27017
+    volumes:
+      - ./mongo/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+
+  server:
+    image: server
+    volumes:
+      - ./server:/server
+      - /server/node_modules
+    build: 
+      context: ./server
+      dockerfile: Dockerfile
+    ports:
+      - 8000:8000
+    environment:
+      - MONGO_HOST=mongodb
+      - MONGO_URI=mongodb://mongodb:27017/database
+      - PORT=8000
+    command: node server.js
+    depends_on:
+      - mongodb
+
+  react:
+    image: react
+    build: 
+      context: ./app
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+    environment:
+      - REACT_APP_SERVER_PORT=8000
+    volumes:
+      - ./app:/app
+      - /app/node_modules
+    depends_on:
+      - server
+    command: npm start
