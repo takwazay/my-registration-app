@@ -31,6 +31,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: npm ci, build and test
         run: |
+          cd ./app
           npm ci
           npm install
           npm test
@@ -54,6 +55,7 @@ jobs:
          git commit -a -m "new version ${{env.GITHUB_VERSION_BUILD}}"  
       - name: Build and docs
         run: |
+          cd ./app
           npm run jsdoc
           npm run build --if-present
       - name: Push changes
