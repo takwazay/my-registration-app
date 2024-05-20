@@ -41,19 +41,13 @@ jobs:
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
-      # Test server unit integration - JavaScript
-      - name: Test server unit integration - JavaScript
-        run: |
-          cd ./app
-          npm run test
-
       # Set up and test Docker containers (Node.js and MongoDB)
       - name: Docker compose up nodejs mongo
         run: |
           docker-compose -f docker-compose-node.yml up -d
           sleep 10
           docker ps
-      - name: Cypress tests
+      - name: Run e2e tests with cypress
         run: |
           cd ./app
           npm run cypress-spec
@@ -67,7 +61,7 @@ jobs:
           docker-compose -f docker-compose.yml up -d
           sleep 10
           docker ps
-      - name: Cypress tests
+      - name: Run e2e tests with cypress
         run: |
           cd ./app
           npm run cypress-spec
