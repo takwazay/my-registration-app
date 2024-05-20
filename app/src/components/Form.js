@@ -116,9 +116,6 @@ const Form = () => {
 
                 }
             );
-
-
-            clearFields();
         } catch (e) {
             console.error(e)
             toast.error('Erreur lors de la sauvegarde des données', e, { autoClose: 3000 });
@@ -149,6 +146,7 @@ const Form = () => {
         } else {
             // Sauvegarde dans la BD
             addUser();
+            clearFields();
             navigate("/utilisateurs"); // Navigate to the "/utilisateurs" route
             toast.success('Utilisateur ajouté avec succès');
 

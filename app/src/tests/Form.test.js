@@ -65,6 +65,7 @@ describe('Form Component Tests', () => {
     const cityInput = screen.getByLabelText('Ville');
     const postalCodeInput = screen.getByLabelText('Code postal');
     const saveButton = screen.getByRole('button', { name: /Enregistrer/i });
+    const defaultDate = "2005-01-01";
 
     fireEvent.change(firstNameInput, { target: { value: 'Takwa' } });
     fireEvent.change(lastNameInput, { target: { value: 'Zayene' } });
@@ -96,7 +97,7 @@ describe('Form Component Tests', () => {
     expect(firstNameInput).toHaveValue('');
     expect(lastNameInput).toHaveValue('');
     expect(emailInput).toHaveValue('');
-    expect(dateOfBirthInput).toHaveValue('');
+    expect(dateOfBirthInput).toHaveValue(defaultDate);
     expect(cityInput).toHaveValue('');
     expect(postalCodeInput).toHaveValue('');
   });
