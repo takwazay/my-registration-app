@@ -23,7 +23,7 @@ import Typography from '@mui/material/Typography';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { validateName, validateEmail, validateAge, validatePostalCode } from '../utils/validation';
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 /**
  * Composant fonctionnel représentant le formulaire d'inscription.
@@ -38,7 +38,7 @@ const Form = () => {
         firstName: '',
         lastName: '',
         email: '',
-        dateOfBirth:  defaultDate,
+        dateOfBirth: defaultDate,
         city: '',
         postalCode: '',
     });
@@ -50,6 +50,25 @@ const Form = () => {
         dateOfBirth: '',
         postalCode: '',
     });
+
+
+    const clearFields = () => {
+        setFormData({
+            firstName: '',
+            lastName: '',
+            email: '',
+            dateOfBirth: defaultDate,
+            city: '',
+            postalCode: '',
+        });
+        setErrors({
+            firstName: '',
+            lastName: '',
+            email: '',
+            dateOfBirth: '',
+            postalCode: '',
+        });
+    };
 
     /**
     * Fonction de validation du formulaire.
@@ -72,8 +91,9 @@ const Form = () => {
     const addUser = async () => {
         const formattedDateOfBirth = formatDate(formData.dateOfBirth);
 
-console.log("formData",formData)
-        try { await fetch(
+        console.log("formData", formData)
+        try {
+            await fetch(
                 `http://127.0.0.1:${process.env.REACT_APP_SERVER_PORT}/users`,
                 {
                     method: "POST",
@@ -82,8 +102,8 @@ console.log("formData",formData)
                         Accept: "application/json",
                         "Accept-Language": "en-US",
                         "Cache-Control": "no-cache",
-                    }, 
-                    body: JSON.stringify({ 
+                    },
+                    body: JSON.stringify({
                         firstName: formData.firstName,
                         lastName: formData.lastName,
                         email: formData.email,
@@ -91,15 +111,14 @@ console.log("formData",formData)
                         city: formData.city,
                         postalCode: formData.postalCode,
                     }),
-                    
-                    
+
+
 
                 }
             );
 
 
-            // clearInputs();
-            // fetchUsers();
+            clearFields();
         } catch (e) {
             console.error(e)
             toast.error('Erreur lors de la sauvegarde des données', e, { autoClose: 3000 });
@@ -110,8 +129,8 @@ console.log("formData",formData)
     const formatDate = (date) => {
         const formattedDate = new Date(date).toISOString().split('T')[0];
         return formattedDate;
-      };
-      
+    };
+
 
     /**
     * Fonction de soumission du formulaire.
