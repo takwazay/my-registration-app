@@ -82,4 +82,63 @@ describe('UserListPage', () => {
       );
     });
   });
+
+  test('fetchUsers is called and sets users correctly', async () => {
+    const mockUsers = [
+      {
+        id: 1,
+        firstName: 'John',
+        lastName: 'Doe',
+        email: 'john.doe@example.com',
+        dateOfBirth: '1990-01-01',
+        city: 'New York',
+        postalCode: '10001',
+      },
+      {
+        id: 2,
+        firstName: 'Jane',
+        lastName: 'Doe',
+        email: 'jane.doe@example.com',
+        dateOfBirth: '1992-02-02',
+        city: 'Los Angeles',
+        postalCode: '90001',
+      },
+    ];
+
+    fetch.mockResolvedValueOnce({
+      ok: true,
+      json: jest.fn().mockResolvedValueOnce(mockUsers),
+    });
+
+    render(
+      <Router>
+        <UserListPage />
+        <ToastContainer />
+      </Router>
+    );
+
+    await waitFor(() => {
+      expect(screen.getByText('John')).toBeInTheDocument();
+      expect(screen.getByText('Jane')).toBeInTheDocument();
+    });
+
+    expect(fetch).toHaveBeenCalledWith(`http://127.0.0.1:${process.env.REACT_APP_SERVER_PORT}/users`);
+  });
+
+  test('fetchUsers handles error correctly', async () => {
+    fetch.mockRejectedValueOnce(new Error('Failed to fetch'));
+
+    render(
+      <Router>
+        <UserListPage />
+        <ToastContainer />
+      </Router>
+    );
+
+    await waitFor(() => {
+      expect(screen.getByText('Erreur lors de la récupération des utilisateurs')).toBeInTheDocument();
+    });
+
+    expect(fetch).toHaveBeenCalledWith(`http://127.0.0.1:${process.env.REACT_APP_SERVER_PORT}/users`);
+  });
 });
