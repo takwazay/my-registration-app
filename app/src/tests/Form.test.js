@@ -1,14 +1,14 @@
 import React from 'react';
 import { fireEvent, render, screen } from "@testing-library/react";
 import Form from "../components/Form";
-import { MemoryRouter } from 'react-router-dom';
+import {   BrowserRouter as Router} from 'react-router-dom';
 
 describe('Form Component Tests', () => {
   beforeEach(() => {
     render(
-      <MemoryRouter>
-        <Form />
-      </MemoryRouter>
+      <Router>
+      <Form />
+      </Router>
     );  });
 
   afterEach(() => {
