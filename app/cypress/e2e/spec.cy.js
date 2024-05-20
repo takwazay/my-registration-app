@@ -117,3 +117,101 @@ describe('Registration Form', () => {
   
 
 });
+
+
+describe('User List Page', () => {
+  beforeEach(() => {
+    cy.visit('http://localhost:3000/utilisateurs');
+  });
+
+  it('should display the user list with correct columns', () => {
+    cy.get('th').contains('Prénom').should('be.visible');
+    cy.get('th').contains('Nom de famille').should('be.visible');
+    cy.get('th').contains('Email').should('be.visible');
+    cy.get('th').contains('Date de naissance').should('be.visible');
+    cy.get('th').contains('Ville').should('be.visible');
+    cy.get('th').contains('Code postal').should('be.visible');
+    cy.get('th').contains('Actions').should('be.visible');
+  });
+
+  it('should call deleteUser function when delete button is clicked', () => {
+    // Mocking users data
+    const mockUsers = [
+      {
+        id: 1,
+        firstName: 'John',
+        lastName: 'Doe',
+        email: 'john.doe@example.com',
+        dateOfBirth: '1990-01-01',
+        city: 'New York',
+        postalCode: '10001',
+      },
+    ];
+
+    cy.intercept('GET', '**/users', {
+      statusCode: 200,
+      body: mockUsers,
+    }).as('getUsers');
+
+    cy.intercept('DELETE', '**/users/1', {
+      statusCode: 200,
+    }).as('deleteUser');
+
+    cy.visit('http://localhost:3000/utilisateurs');
+
+    cy.wait('@getUsers');
+
+    cy.contains('Supprimer').click();
+
+    cy.wait('@deleteUser').its('response.statusCode').should('eq', 200);
+
+    cy.contains('Utilisateur supprimé avec succès').should('be.visible');
+  });
+
+  it('should fetch users and display them correctly', () => {
+    const mockUsers = [
+      {
+        id: 1,
+        firstName: 'John',
+        lastName: 'Doe',
+        email: 'john.doe@example.com',
+        dateOfBirth: '1990-01-01',
+        city: 'New York',
+        postalCode: '10001',
+      },
+      {
+        id: 2,
+        firstName: 'Jane',
+        lastName: 'Doe',
+        email: 'jane.doe@example.com',
+        dateOfBirth: '1992-02-02',
+        city: 'Los Angeles',
+        postalCode: '90001',
+      },
+    ];
+
+    cy.intercept('GET', '**/users', {
+      statusCode: 200,
+      body: mockUsers,
+    }).as('getUsers');
+
+    cy.visit('http://localhost:3000/utilisateurs');
+
+    cy.wait('@getUsers');
+
+    cy.get('td').contains('John').should('be.visible');
+    cy.get('td').contains('Jane').should('be.visible');
+  });
+
+  it('should handle error correctly when fetching users fails', () => {
+    cy.intercept('GET', '**/users', {
+      statusCode: 500,
+    }).as('getUsers');
+
+    cy.visit('http://localhost:3000/utilisateurs');
+
+    cy.wait('@getUsers');
+
+    cy.contains('Erreur lors de la récupération des utilisateurs').should('be.visible');
+  });
+});
