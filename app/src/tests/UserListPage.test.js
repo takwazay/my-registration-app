@@ -40,9 +40,9 @@ describe('UserListPage', () => {
     const mockUsers = [
       {
         id: 1,
-        firstName: 'John',
-        lastName: 'Doe',
-        email: 'john.doe@example.com',
+        firstName: 'Takwa',
+        lastName: 'Zayene',
+        email: 'Takwa.doe@example.com',
         dateOfBirth: '1990-01-01',
         city: 'New York',
         postalCode: '10001',
@@ -62,7 +62,7 @@ describe('UserListPage', () => {
     );
 
     await waitFor(() => {
-      expect(screen.getByText('John')).toBeInTheDocument();
+      expect(screen.getByText('Takwa')).toBeInTheDocument();
     });
 
     fetch.mockResolvedValueOnce({ ok: true });
@@ -87,9 +87,9 @@ describe('UserListPage', () => {
     const mockUsers = [
       {
         id: 1,
-        firstName: 'John',
-        lastName: 'Doe',
-        email: 'john.doe@example.com',
+        firstName: 'Takwa',
+        lastName: 'Zayene',
+        email: 'Takwa.doe@example.com',
         dateOfBirth: '1990-01-01',
         city: 'New York',
         postalCode: '10001',
@@ -97,7 +97,7 @@ describe('UserListPage', () => {
       {
         id: 2,
         firstName: 'Jane',
-        lastName: 'Doe',
+        lastName: 'Zayene',
         email: 'jane.doe@example.com',
         dateOfBirth: '1992-02-02',
         city: 'Los Angeles',
@@ -118,7 +118,7 @@ describe('UserListPage', () => {
     );
 
     await waitFor(() => {
-      expect(screen.getByText('John')).toBeInTheDocument();
+      expect(screen.getByText('Takwa')).toBeInTheDocument();
       expect(screen.getByText('Jane')).toBeInTheDocument();
     });
 

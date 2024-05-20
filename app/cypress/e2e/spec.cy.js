@@ -17,9 +17,9 @@ describe('Registration Form', () => {
 
   it('should display an error if the postal code is not valid', () => {
     // Fill out the form fields
-    cy.get('input[name="firstName"]').type('John');
-    cy.get('input[name="lastName"]').type('Doe');
-    cy.get('input[name="email"]').type('johndoe@example.com');
+    cy.get('input[name="firstName"]').type('Takwa');
+    cy.get('input[name="lastName"]').type('Zayene');
+    cy.get('input[name="email"]').type('Takwadoe@example.com');
     cy.get('input[name="dateOfBirth"]').type('2000-01-01');
     cy.get('input[name="city"]').type('New York');
     
@@ -55,10 +55,10 @@ describe('Registration Form', () => {
   
     it('should display an error if the first name contains invalid characters', () => {
       // Fill out the form fields with invalid characters in the first name
-      cy.get('input[name="firstName"]').type('John123');
+      cy.get('input[name="firstName"]').type('Takwa123');
   
-      cy.get('input[name="lastName"]').type('Doe');
-      cy.get('input[name="email"]').type('johndoe@example.com');
+      cy.get('input[name="lastName"]').type('Zayene');
+      cy.get('input[name="email"]').type('Takwadoe@example.com');
       cy.get('input[name="dateOfBirth"]').type('1990-01-01');
       cy.get('input[name="city"]').type('New York');
       cy.get('input[name="postalCode"]').type('10001');
@@ -90,9 +90,9 @@ describe('Registration Form', () => {
 
   it("displays success toast on successful form submission", () => {
     // Fill out the form fields with valid input
-    cy.get('input[name="firstName"]').type('John');
-    cy.get('input[name="lastName"]').type('Doe');
-    cy.get('input[name="email"]').type('johndoe@example.com');
+    cy.get('input[name="firstName"]').type('Takwa');
+    cy.get('input[name="lastName"]').type('Zayene');
+    cy.get('input[name="email"]').type('Takwadoe@example.com');
     cy.get('input[name="dateOfBirth"]').type('1990-01-01');
     cy.get('input[name="city"]').type('New York');
     cy.get('input[name="postalCode"]').type('10001');
@@ -139,9 +139,9 @@ describe('User List Page', () => {
     const mockUsers = [
       {
         id: 1,
-        firstName: 'John',
-        lastName: 'Doe',
-        email: 'john.doe@example.com',
+        firstName: 'Takwa',
+        lastName: 'Zayene',
+        email: 'Takwa.doe@example.com',
         dateOfBirth: '1990-01-01',
         city: 'New York',
         postalCode: '10001',
@@ -172,9 +172,9 @@ describe('User List Page', () => {
     const mockUsers = [
       {
         id: 1,
-        firstName: 'John',
-        lastName: 'Doe',
-        email: 'john.doe@example.com',
+        firstName: 'Takwa',
+        lastName: 'Zayene',
+        email: 'Takwa.doe@example.com',
         dateOfBirth: '1990-01-01',
         city: 'New York',
         postalCode: '10001',
@@ -182,7 +182,7 @@ describe('User List Page', () => {
       {
         id: 2,
         firstName: 'Jane',
-        lastName: 'Doe',
+        lastName: 'Zayene',
         email: 'jane.doe@example.com',
         dateOfBirth: '1992-02-02',
         city: 'Los Angeles',
@@ -199,7 +199,7 @@ describe('User List Page', () => {
 
     cy.wait('@getUsers');
 
-    cy.get('td').contains('John').should('be.visible');
+    cy.get('td').contains('Takwa').should('be.visible');
     cy.get('td').contains('Jane').should('be.visible');
   });
 

@@ -43,7 +43,7 @@ jobs:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
       # Set up and test Docker containers (Node.js and MongoDB)
-      - name: Docker compose up nodejs mongo
+      - name: Docker compose up nodeJ mongo
         run: |
           docker-compose -f docker-compose-node.yml up -d
           sleep 10
@@ -52,7 +52,7 @@ jobs:
         run: |
           cd ./app
           npm run e2e:chrome
-      - name: Docker compose down nodejs mongo
+      - name: Docker compose down nodeJS mongo
         run: |
           docker-compose -f docker-compose-node.yml down
 
