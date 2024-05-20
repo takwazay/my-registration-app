@@ -25,6 +25,7 @@ const UserListPage = () => {
       const data = await response.json();
       setUsers(data);
     } catch (error) {
+      toast.error('Erreur lors de la récupération des utilisateurs');
       console.error('Error fetching users:', error);
     }
   };

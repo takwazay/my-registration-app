@@ -3,7 +3,7 @@ import { render, screen, waitFor, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import UserListPage from '../components/UserListPage';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { ToastContainer } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 
 // Mock the fetch function
 global.fetch = jest.fn();
@@ -27,6 +27,7 @@ describe('UserListPage', () => {
     ];
 
     fetch.mockResolvedValueOnce({
+      ok: true,
       json: jest.fn().mockResolvedValueOnce(mockUsers),
     });
 
@@ -61,6 +62,7 @@ describe('UserListPage', () => {
     ];
 
     fetch.mockResolvedValueOnce({
+      ok: true,
       json: jest.fn().mockResolvedValueOnce(mockUsers),
     });
 
@@ -75,7 +77,7 @@ describe('UserListPage', () => {
       expect(screen.getByText('John')).toBeInTheDocument();
     });
 
-    fetch.mockResolvedValueOnce({});
+    fetch.mockResolvedValueOnce({ ok: true });
 
     const deleteButton = screen.getByRole('button', { name: /Supprimer/i });
     fireEvent.click(deleteButton);
@@ -95,7 +97,10 @@ describe('UserListPage', () => {
   });
 
   test('displays an error message when fetching users fails', async () => {
-    fetch.mockRejectedValueOnce(new Error('Failed to fetch'));
+    fetch.mockResolvedValueOnce({
+      ok: false,
+      json: jest.fn().mockResolvedValueOnce({ message: 'Failed to fetch' }),
+    });
 
     render(
       <Router>
@@ -124,6 +129,7 @@ describe('UserListPage', () => {
     ];
 
     fetch.mockResolvedValueOnce({
+      ok: true,
       json: jest.fn().mockResolvedValueOnce(mockUsers),
     });
 
@@ -138,7 +144,7 @@ describe('UserListPage', () => {
       expect(screen.getByText('John')).toBeInTheDocument();
     });
 
-    fetch.mockRejectedValueOnce(new Error('Failed to delete'));
+    fetch.mockResolvedValueOnce({ ok: false });
 
     const deleteButton = screen.getByRole('button', { name: /Supprimer/i });
     fireEvent.click(deleteButton);
