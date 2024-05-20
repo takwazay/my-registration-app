@@ -1,19 +1,17 @@
-name: Build, Test and Deploy React Application
+name: Build, Test an Deply React Application
 
-# Controls when the action will run. 
 on:
-  # Triggers the workflow on push or pull request events but only for the main branch
   push:
-    branches: [ master ]
+    branches: [main]
   pull_request:
-    branches: [ master ]
+    branches: [main]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   build_test:
-    permissions:                # Job-level permissions configuration starts here
-        contents: write           # 'write' access to repository contents
-        pull-requests: write      # 'write' access to pull requests
+    permissions: # Job-level permissions configuration starts here
+      contents: write # 'write' access to repository contents
+      pull-requests: write # 'write' access to pull requests
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
@@ -24,78 +22,56 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
-      - name: npm ci, build and test
+      - name: npm ci and test
         run: |
           cd ./app
           npm ci
-          npm install
           npm test
-      - name: Build the stack
-        run: docker-compose -f docker-compose-v3.yml up -d
-      - name: Run e2e tests with cypress
-        uses: cypress-io/github-action@v6
-      - name: Stop the stack
-        run: docker-compose -f docker-compose-v3.yml down 
-          # we use either git tag and npm version or semver
-      - name: Set env
-        run: |
-          npm i -g semver
-          echo "GITHUB_VERSION_BUILD=$(echo $(semver 0.1.1 -i prerelease --preid ${{github.run_id}}-${{github.run_number}}-${{github.run_attempt}}))" >> $GITHUB_ENV
-      - name: Update versionning
-        run: |
-         git config --global user.email "zayenetakwa@gmail.com"
-         git config --global user.name "takwazay" 
-         npm version ${{env.GITHUB_VERSION_BUILD}}
-         echo ${{env.GITHUB_VERSION_BUILD}} >> README.md
-         git commit -a -m "new version ${{env.GITHUB_VERSION_BUILD}}"  
       - name: Build and docs
         run: |
           cd ./app
           npm run jsdoc
           npm run build --if-present
-      - name: Push changes
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: ${{ github.ref }}
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v3
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-      - name: Setup Pages
-        id: pages
-        uses: actions/configure-pages@v3
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v2
-        with:
-          # Upload entire repository
-          path: build
-          if-no-files-found: error
 
-# Deploy job
-  deploy:
-    # Deploy to the github-pages environment
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
+      # Test server unit integration - JavaScript
+      - name: Test server unit integration - JavaScript
+        run: |
+          cd ./app
+          npm run test
 
-    # Grant GITHUB_TOKEN the permissions required to make a Pages deployment
-    permissions:
-      pages: write      
-      # to deploy to Pages
-      id-token: write   
-      # to verify the deployment originates from an appropriate source
+      # Set up and test Docker containers (Node.js and MongoDB)
+      - name: Docker compose up nodejs mongo
+        run: |
+          docker-compose -f docker-compose-node.yml up -d
+          sleep 10
+          docker ps
+      - name: Cypress tests
+        run: |
+          cd ./app
+          npm run cypress-spec
+      - name: Docker compose down nodejs mongo
+        run: |
+          docker-compose -f docker-compose-node.yml down
 
-    # Add a dependency to the build job
-    needs: build_test
-    # Specify runner + deployment step
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v2
+      # Set up and test Docker containers (Python and MySql)
+      - name: Docker compose up python mysql
+        run: |
+          docker-compose -f docker-compose.yml up -d
+          sleep 10
+          docker ps
+      - name: Cypress tests
+        run: |
+          cd ./app
+          npm run cypress-spec
+      - name: Docker compose down python mysql
+        run: |
+          docker-compose -f docker-compose.yml down
