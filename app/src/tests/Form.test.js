@@ -1,15 +1,12 @@
 import React from 'react';
 import { fireEvent, render, screen } from "@testing-library/react";
 import Form from "../components/Form";
-import {   BrowserRouter as Router} from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 
 describe('Form Component Tests', () => {
   beforeEach(() => {
-    render(
-      <Router>
-      <Form />
-      </Router>
-    );  });
+    render(<BrowserRouter><Form/></BrowserRouter>);
+  });
 
   afterEach(() => {
     const firstNameInput = screen.getByLabelText('Prenom');

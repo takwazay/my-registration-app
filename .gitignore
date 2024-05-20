@@ -8,7 +8,7 @@ server/node_modules
 /server/__pycache__
 
 # testing
-/coverage
+app/coverage
 
 # production
 /build
