@@ -33,7 +33,8 @@
     "jsdoc": "jsdoc -R ./README.md -c ./jsdoc.config.json -r -d ./public/docs",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "cypress": "cypress open"
+    "cypress": "cypress open",
+    "e2e:chrome": "cypress run --spec cypress/e2e/spec.cy.js --browser chrome"
   },
   "eslintConfig": {
     "extends": [

@@ -50,7 +50,7 @@ jobs:
       - name: Run e2e tests with cypress
         run: |
           cd ./app
-          npm run cypress-spec
+          npm run e2e:chrome
       - name: Docker compose down nodejs mongo
         run: |
           docker-compose -f docker-compose-node.yml down
@@ -64,7 +64,7 @@ jobs:
       - name: Run e2e tests with cypress
         run: |
           cd ./app
-          npm run cypress-spec
+          npm run e2e:chrome
       - name: Docker compose down python mysql
         run: |
           docker-compose -f docker-compose.yml down
