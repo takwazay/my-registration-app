@@ -73,8 +73,7 @@ const Form = () => {
         const formattedDateOfBirth = formatDate(formData.dateOfBirth);
 
 console.log("formData",formData)
-        try {
-            const response = await fetch(
+        try { await fetch(
                 `http://127.0.0.1:${process.env.REACT_APP_SERVER_PORT}/users`,
                 {
                     method: "POST",
