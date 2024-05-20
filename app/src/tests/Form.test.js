@@ -1,11 +1,15 @@
 import React from 'react';
 import { fireEvent, render, screen } from "@testing-library/react";
 import Form from "../components/Form";
+import { MemoryRouter } from 'react-router-dom';
 
 describe('Form Component Tests', () => {
   beforeEach(() => {
-    render(<Form />);
-  });
+    render(
+      <MemoryRouter>
+        <Form />
+      </MemoryRouter>
+    );  });
 
   afterEach(() => {
     const firstNameInput = screen.getByLabelText('Prenom');
