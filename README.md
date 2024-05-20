@@ -2,15 +2,9 @@
 
 Ce projet est une application de formulaire d'inscription développée dans le cadre d'un projet scolaire. L'application permet aux utilisateurs de s'inscrire et de gérer une liste d'utilisateurs.
 
-## Étudiants du groupe
-
-Ce projet a été réalisé par le groupe suivant :
-- John Doe (john.doe@example.com) : Responsable du frontend
-- Jane Smith (jane.smith@example.com) : Responsable du backend
-
 ## Architecture Docker
 
-L'application est composée de deux parties principales : le frontend et le backend. Chaque partie est containerisée à l'aide de Docker pour une portabilité et une facilité de déploiement.
+L'application est composée de deux parties principales : le frontend et le backend(NodeJS / Pyhton). Chaque partie est containerisée à l'aide de Docker pour une portabilité et une facilité de déploiement.
 
 ### Frontend
 
@@ -30,6 +24,8 @@ docker-compose -f docker-compose-node.yml up -d
 
 ### Backend (alternative avec Python)
 Une alternative pour le backend est développée avec Python (dans le répertoire `server-py` de ce projet). Il est également containerisé à l'aide de Docker. 
+
+### Lancer Python architectures avec docker 
 Pour lancer l'architecture Docker avec mysql / python / react, suivez ces étapes :
 
 1. Assurez-vous que Docker est installé sur votre système.
