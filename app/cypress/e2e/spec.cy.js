@@ -100,7 +100,7 @@ describe('Registration Form', () => {
     // Intercept the toast.success() call and ensure it is called with the correct message
     cy.intercept('POST', '**/users', (req) => {
       req.reply(() => {
-        toast.success('Utilisateur ajouté avec succès');
+        cy.contains('Utilisateur ajouté avec succès').should('be.visible');
         return { status: 200 };
       });
     }).as('addUser');
