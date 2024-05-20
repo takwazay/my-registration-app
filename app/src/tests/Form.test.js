@@ -143,32 +143,37 @@ describe('Form Component Tests', () => {
   });
 
 
-  // test('should display error message when save data fails', () => {
-  //   // Récupérer les éléments d'entrée
-  //   const firstNameInput = screen.getByLabelText('Prenom');
-  //   const lastNameInput = screen.getByLabelText('Nom de famille');
-  //   const emailInput = screen.getByLabelText('Email');
-  //   const dateOfBirthInput = screen.getByLabelText('Date de naissance');
-  //   const cityInput = screen.getByLabelText('Ville');
-  //   const postalCodeInput = screen.getByLabelText('Code postal');
-  //   const saveButton = screen.getByRole('button', { name: /Enregistrer/i });
 
-  //   // Simuler la saisie dans les champs d'entrée
-  //   fireEvent.change(firstNameInput, { target: { value: 'Takwa' } });
-  //   fireEvent.change(lastNameInput, { target: { value: 'Zayene' } });
-  //   fireEvent.change(emailInput, { target: { value: 'takwa.zayene@example.com' } });
-  //   fireEvent.change(dateOfBirthInput, { target: { value: '1999-01-01' } });
-  //   fireEvent.change(cityInput, { target: { value: 'Nice' } });
-  //   fireEvent.change(postalCodeInput, { target: { value: '06000' } });
+test('should display error message when save data fails', async () => {
+  
+  // Mock the fetch function
+global.fetch = jest.fn(() =>
+  Promise.reject(new Error('Mock fetch error'))
+);
+  // Récupérer les éléments d'entrée
+  const firstNameInput = screen.getByLabelText('Prenom');
+  const lastNameInput = screen.getByLabelText('Nom de famille');
+  const emailInput = screen.getByLabelText('Email');
+  const dateOfBirthInput = screen.getByLabelText('Date de naissance');
+  const cityInput = screen.getByLabelText('Ville');
+  const postalCodeInput = screen.getByLabelText('Code postal');
+  const saveButton = screen.getByRole('button', { name: /Enregistrer/i });
 
-  //   // Simuler l'échec de la récupération des données du localStorage
-  //   // jest.spyOn(Storage.prototype, 'setItem').mockImplementation(() => { throw new Error('Mock localStorage error'); });
+  // Simuler la saisie dans les champs d'entrée
+  fireEvent.change(firstNameInput, { target: { value: 'Takwa' } });
+  fireEvent.change(lastNameInput, { target: { value: 'Zayene' } });
+  fireEvent.change(emailInput, { target: { value: 'takwa.zayene@example.com' } });
+  fireEvent.change(dateOfBirthInput, { target: { value: '1999-01-01' } });
+  fireEvent.change(cityInput, { target: { value: 'Nice' } });
+  fireEvent.change(postalCodeInput, { target: { value: '06000' } });
 
-  //   // Cliquer sur le bouton d'enregistrement
-  //   fireEvent.click(saveButton);
+  // Cliquer sur le bouton d'enregistrement
+  fireEvent.click(saveButton);
 
-  //   // S'assurer que le message d'erreur est affiché
-  //   const errorToast = screen.getByText(/Erreur lors de la sauvegarde des donnée:/i);
-  //   expect(errorToast).toBeInTheDocument();
-  // });
+  // S'assurer que le message d'erreur est affiché
+  await waitFor(() => {
+    const errorToast = screen.getByText(/Erreur lors de la sauvegarde des données/i);
+    expect(errorToast).toBeInTheDocument();
+  });
+});
 });
