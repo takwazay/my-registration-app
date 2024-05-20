@@ -71,8 +71,6 @@ app.post("/users", async (req, res) => {
 });
 // Route to create a new user
 app.post("/add", async (req, res) => {
-  console.log("formData", req.body)
-  console.log("formData", req.body.firstName)
 
   const user = new User({
     firstName: req.body.firstName,
