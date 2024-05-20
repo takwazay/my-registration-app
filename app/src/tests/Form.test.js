@@ -2,6 +2,7 @@ import React from 'react';
 import { fireEvent, render, screen } from "@testing-library/react";
 import Form from "../components/Form";
 import { BrowserRouter } from 'react-router-dom';
+import 'whatwg-fetch';
 
 describe('Form Component Tests', () => {
   beforeEach(() => {
